@@ -20,7 +20,7 @@ ifeq ($(config),release)
   ifeq ($(origin AR), default)
     AR = ar
   endif
-  TARGETDIR = ../../output
+  TARGETDIR = ../bin
   TARGET = $(TARGETDIR)/hello2
   OBJDIR = obj/Release
   DEFINES += -DNDEBUG
@@ -55,7 +55,7 @@ ifeq ($(config),debug)
   ifeq ($(origin AR), default)
     AR = ar
   endif
-  TARGETDIR = ../../output
+  TARGETDIR = ../bin
   TARGET = $(TARGETDIR)/hello2
   OBJDIR = obj/Debug
   DEFINES += -DDEBUG
@@ -82,6 +82,7 @@ endif
 
 OBJECTS := \
 	$(OBJDIR)/error.o \
+	$(OBJDIR)/stat.o \
 	$(OBJDIR)/main.o \
 
 RESOURCES := \
@@ -142,6 +143,9 @@ $(OBJECTS): | $(OBJDIR)
 endif
 
 $(OBJDIR)/error.o: ../../common/error.c
+	@echo $(notdir $<)
+	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/stat.o: ../../common/stat.c
 	@echo $(notdir $<)
 	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/main.o: ../../hello2/main.c

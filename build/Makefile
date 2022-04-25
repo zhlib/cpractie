@@ -11,13 +11,21 @@ endif
 ifeq ($(config),release)
   hello1_config = release
   hello2_config = release
+  openat_config = release
+  dup2_config = release
+  uid_config = release
+  game_config = release
 endif
 ifeq ($(config),debug)
   hello1_config = debug
   hello2_config = debug
+  openat_config = debug
+  dup2_config = debug
+  uid_config = debug
+  game_config = debug
 endif
 
-PROJECTS := hello1 hello2
+PROJECTS := hello1 hello2 openat dup2 uid game
 
 .PHONY: all clean help $(PROJECTS) 
 
@@ -35,9 +43,37 @@ ifneq (,$(hello2_config))
 	@${MAKE} --no-print-directory -C hello2 -f Makefile config=$(hello2_config)
 endif
 
+openat:
+ifneq (,$(openat_config))
+	@echo "==== Building openat ($(openat_config)) ===="
+	@${MAKE} --no-print-directory -C openat -f Makefile config=$(openat_config)
+endif
+
+dup2:
+ifneq (,$(dup2_config))
+	@echo "==== Building dup2 ($(dup2_config)) ===="
+	@${MAKE} --no-print-directory -C dup2 -f Makefile config=$(dup2_config)
+endif
+
+uid:
+ifneq (,$(uid_config))
+	@echo "==== Building uid ($(uid_config)) ===="
+	@${MAKE} --no-print-directory -C uid -f Makefile config=$(uid_config)
+endif
+
+game:
+ifneq (,$(game_config))
+	@echo "==== Building game ($(game_config)) ===="
+	@${MAKE} --no-print-directory -C game -f Makefile config=$(game_config)
+endif
+
 clean:
 	@${MAKE} --no-print-directory -C hello1 -f Makefile clean
 	@${MAKE} --no-print-directory -C hello2 -f Makefile clean
+	@${MAKE} --no-print-directory -C openat -f Makefile clean
+	@${MAKE} --no-print-directory -C dup2 -f Makefile clean
+	@${MAKE} --no-print-directory -C uid -f Makefile clean
+	@${MAKE} --no-print-directory -C game -f Makefile clean
 
 help:
 	@echo "Usage: make [config=name] [target]"
@@ -51,5 +87,9 @@ help:
 	@echo "   clean"
 	@echo "   hello1"
 	@echo "   hello2"
+	@echo "   openat"
+	@echo "   dup2"
+	@echo "   uid"
+	@echo "   game"
 	@echo ""
 	@echo "For more information, see https://github.com/premake/premake-core/wiki"

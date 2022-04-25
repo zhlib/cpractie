@@ -21,7 +21,7 @@ ifeq ($(config),release)
     AR = ar
   endif
   TARGETDIR = ../bin
-  TARGET = $(TARGETDIR)/hello1
+  TARGET = $(TARGETDIR)/dup2
   OBJDIR = obj/Release
   DEFINES += -DNDEBUG
   INCLUDES +=
@@ -56,7 +56,7 @@ ifeq ($(config),debug)
     AR = ar
   endif
   TARGETDIR = ../bin
-  TARGET = $(TARGETDIR)/hello1
+  TARGET = $(TARGETDIR)/dup2
   OBJDIR = obj/Debug
   DEFINES += -DDEBUG
   INCLUDES +=
@@ -95,7 +95,7 @@ ifeq (.exe,$(findstring .exe,$(ComSpec)))
 endif
 
 $(TARGET): $(GCH) ${CUSTOMFILES} $(OBJECTS) $(LDDEPS) $(RESOURCES) | $(TARGETDIR)
-	@echo Linking hello1
+	@echo Linking dup2
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -118,7 +118,7 @@ else
 endif
 
 clean:
-	@echo Cleaning hello1
+	@echo Cleaning dup2
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -148,7 +148,7 @@ $(OBJDIR)/error.o: ../../common/error.c
 $(OBJDIR)/stat.o: ../../common/stat.c
 	@echo $(notdir $<)
 	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/main.o: ../../hello1/main.c
+$(OBJDIR)/main.o: ../../dup2/main.c
 	@echo $(notdir $<)
 	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

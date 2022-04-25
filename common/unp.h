@@ -515,4 +515,10 @@ void	 err_ret(const char *, ...);
 void	 err_sys(const char *, ...);
 void	 err_exit(int, const char *, ...);
 
+int 	 fileType(int argc, char *argv[]);
+void 	 get_dir(char *dir);
+void 	 get_perm(mode_t mod,char *buf);
+void     get_ltime(time_t *t,char *buf);
+char     get_type(mode_t mod);
+
 #endif	/* __unp_h */

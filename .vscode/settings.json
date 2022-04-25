@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "unp.h": "c"
-    }
+        "unp.h": "c",
+        "typeinfo": "c",
+        "types.h": "c",
+        "stdio.h": "c",
+        "curses.h": "c"
+    },
+    "files.autoSave": "onFocusChange"
 }
